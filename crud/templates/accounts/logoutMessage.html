@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Cerrar sesion</h2>
+  <form method="post" action="{% url 'accounts:logout' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>Estás seguro que deseas cerrar sesion?</p>
+    <button type="submit">Cerrar sesion</button>
+    <a href="{% url 'persona:lista' %}">Cancelar</a>
+  </form>
+{% endblock %}
