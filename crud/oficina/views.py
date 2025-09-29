@@ -9,6 +9,7 @@ class OficinaListView(ListView):
     model = Oficina
     template_name = "oficina/lista.html"
     context_object_name = "oficinas"
+    paginate_by = 10
 
 class OficinaDetailView(DetailView):
     model = Oficina
