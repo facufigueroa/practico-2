@@ -3,12 +3,20 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Persona
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 class PersonaListView(ListView):
     model = Persona
     template_name = "persona/lista.html"
     context_object_name = "personas"
     paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.GET.get("q")
+        if search_query:
+            queryset = queryset.filter(Q(nombre__icontains=search_query) or Q(apellido__icontains=search_query))
+        return queryset
 
 class PersonaDetailView(DetailView):
     model = Persona

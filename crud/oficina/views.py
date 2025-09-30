@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from .models import Oficina
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 
 class OficinaListView(ListView):
@@ -10,6 +11,14 @@ class OficinaListView(ListView):
     template_name = "oficina/lista.html"
     context_object_name = "oficinas"
     paginate_by = 10
+    ordering = ['nombre']
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get("q")
+        if query:
+            queryset = queryset.filter(Q(nombre__icontains=query) | Q(nombreCorto__icontains=query))
+        return queryset
 
 class OficinaDetailView(DetailView):
     model = Oficina
