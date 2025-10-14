@@ -2,11 +2,11 @@
 
 {% block content %}
 
-    <form method="get" class="mb-3">
-        <div class="input-group">
-            <input type="text" class="form-control" name="q" placeholder="Buscar oficinas..." value="{{ request.GET.q }}">
-            <button class="btn btn-outline-secondary" type="submit">Buscar</button>
-        </div>
+    <h2 class="text-center my-4">Listado de Oficinas</h2>
+
+    <form method="get" class="d-flex justify-content-center mb-3">
+        <input type="text" name="q" placeholder="Buscar oficinas..." value="{{ request.GET.q }}" required>
+        <button class="btn btn-secondary" type="submit">Buscar</button>
     </form>
     
     {% if oficinas %}
@@ -14,8 +14,8 @@
         <ul class="d-flex flex-column align-items-center list-unstyled">
             
             {% for oficina in oficinas %}
-                <li class="d-flex flex-row align-items-center mb-3">
-                    <p>{{oficina}}</p>
+                <li class="d-flex flex-row align-items-center mb-3 column-gap-3">
+                    <p class="m-0">{{oficina}}</p>
                     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <button class="btn btn-success" type="button">
                             <a class="text-decoration-none text-white" href="{% url 'oficina:detalle' oficina.id %}">Ver</a>

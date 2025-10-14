@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-2" data-bs-theme="dark">
   <div class="container-fluid">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url '' %}">Inicio</a>
         </li>
@@ -13,15 +14,15 @@
         </li>
       </ul>
 
-      <form class="d-flex" role="search" method="get" action="{% url 'persona:lista' %}">
-        <input class="form-control me-2" type="search" name="q" placeholder="Buscar personas..." value="{{ request.GET.q }}" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      <form class="d-flex mx-auto" role="search" method="get" action="{% url 'persona:lista' %}">
+        <input class="form-control me-2" type="search" name="q" placeholder="Buscar personas..." value="{{ request.GET.q }}" aria-label="Search" required/>
+        <button class="btn btn-outline-light" type="submit">Buscar</button>
       </form>
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mb-2 mb-lg-0">
         {% if user.is_authenticated %}
-          <li class="nav-item">
-            <p class="text-white">Usuario: {{user.username}}</p>
+          <li class="nav-item d-flex align-items-center">
+            <p class="text-white m-0 ">Usuario: {{user.username}}</p>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'accounts:logoutMessage' %}">Cerrar sesión</a>
